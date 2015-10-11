@@ -185,7 +185,7 @@ public class AppsScriptApiQuickstart {
         // under Publish > Deploy as API executable.
         Properties properties = new Properties();
         properties.load(AppsScriptApiQuickstart.class.getResourceAsStream("/config.properties"));
-        final String scriptId = properties.getProperty("example_file_id");
+        final String scriptId = properties.getProperty("exampleScriptFileId");
         Script service = getScriptService();
 
         // Create an execution request object.

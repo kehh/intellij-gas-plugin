@@ -12,6 +12,7 @@ targetCompatibility = 1.5
 
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 dependencies {
@@ -19,4 +20,5 @@ dependencies {
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
     compile 'com.google.apis:google-api-services-drive:v2-rev170-1.20.0'
     compile 'com.google.apis:google-api-services-script:v1-rev1-1.20.0'
+    compile 'com.michaelsnowden:google-app-scripts-drive:1.0-SNAPSHOT'
 }

@@ -40,6 +40,10 @@
     <!-- Add your actions here -->
     <action id="gas_plugin.GasDeployer" class="com.michaelsnowden.gas_plugin.GasDeployer"
             text="Deploy GAS code to Drive"/>
+    <action id="gscripts-download" class="com.michaelsnowden.gas_plugin.GscriptsDownload"
+            text="Download gscripts from Google Drive">
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta O"/>
+    </action>
   </actions>
 
 </idea-plugin>
