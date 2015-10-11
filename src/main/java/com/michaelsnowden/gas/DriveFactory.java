@@ -34,7 +34,7 @@ public class DriveFactory {
      * Directory to store user credentials for this application.
      */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/drive-java-quickstart");
+            System.getProperty("user.home"), ".credentials/gas-plugin");
 
     /**
      * Global instance of the {@link FileDataStoreFactory}.
