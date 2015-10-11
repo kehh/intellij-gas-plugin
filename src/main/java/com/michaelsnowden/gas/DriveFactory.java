@@ -1,4 +1,4 @@
-package com.michaelsnowden.gas_plugin;
+package com.michaelsnowden.gas;
 
 /**
  * @author michael.snowden
@@ -16,14 +16,11 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
-import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.FileList;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Set;
 
 public class DriveFactory {
@@ -115,24 +112,5 @@ public class DriveFactory {
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
-    }
-
-    public static void main(String[] args) throws IOException {
-        // Build a new authorized API client service.
-        Drive service = getDriveService();
-
-        // Print the names and IDs for up to 10 files.
-        FileList result = service.files().list()
-                .setMaxResults(10)
-                .execute();
-        List<File> files = result.getItems();
-        if (files == null || files.size() == 0) {
-            System.out.println("No files found.");
-        } else {
-            System.out.println("Files:");
-            for (File file : files) {
-                System.out.printf("%s (%s)\n", file.getTitle(), file.getId());
-            }
-        }
     }
 }

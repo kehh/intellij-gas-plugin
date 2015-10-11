@@ -1,7 +1,8 @@
-package com.michaelsnowden.gas_plugin;
+package com.michaelsnowden.gas;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
@@ -9,7 +10,6 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
@@ -23,28 +23,30 @@ import java.io.IOException;
 /**
  * @author michael.snowden
  */
-public class GscriptsDownload extends AnAction {
+public class DownloadAction extends AnAction {
     public void actionPerformed(AnActionEvent actionEvent) {
         try {
-            Project project = actionEvent.getProject();
+            com.intellij.openapi.project.Project project = actionEvent.getProject();
             assert project != null;
-            GASProject gasProject = getGasProject(project);
-            importGasProject(DataKeys.PSI_FILE.getData(actionEvent.getDataContext()), project, gasProject);
+            Project gasProject = getGasProject(project);
+            final DataContext dataContext = actionEvent.getDataContext();
+            final PsiFile currentFile = DataKeys.PSI_FILE.getData(dataContext);
+            importGasProject(currentFile, project, gasProject);
             System.out.println("");
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
-    private GASProject getGasProject(Project project) throws IOException {
+    private Project getGasProject(com.intellij.openapi.project.Project project) throws IOException {
         final String message = "What is your GAS project ID?";
         final String title = "Input Your GAS Project ID";
         final Icon questionIcon = Messages.getQuestionIcon();
         final String projectId = Messages.showInputDialog(project, message, title, questionIcon);
-        return GASProject.downloadGASProject(DriveFactory.getDriveService(), projectId);
+        return Project.downloadGASProject(DriveFactory.getDriveService(), projectId);
     }
 
-    private void importGasProject(PsiFile currentFile, Project project, GASProject gasProject) {
+    private void importGasProject(PsiFile currentFile, com.intellij.openapi.project.Project project, Project gasProject) {
         VirtualFile chooseFile = project.getBaseDir();
         if (currentFile != null) {
             chooseFile = currentFile.getVirtualFile();
@@ -58,7 +60,7 @@ public class GscriptsDownload extends AnAction {
         final PsiDirectory directory = psiManager.findDirectory(chooseFile);
 
         FileType gs = FileTypeManager.getInstance().getFileTypeByExtension("gs");
-        for (GASFile gasFile : gasProject.getGasFiles()) {
+        for (File gasFile : gasProject.getFiles()) {
             String source = gasFile.getSource();
             String name = gasFile.getName() + ".gs";
             final PsiFile file = PsiFileFactory.getInstance(project).createFileFromText(name, gs, source);

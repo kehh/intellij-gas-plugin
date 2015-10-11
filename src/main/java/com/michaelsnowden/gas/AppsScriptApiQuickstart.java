@@ -1,4 +1,4 @@
-package com.michaelsnowden.gas_plugin;
+package com.michaelsnowden.gas;
 
 /**
  * @author michael.snowden

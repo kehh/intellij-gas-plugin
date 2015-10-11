@@ -1,22 +1,22 @@
-package com.michaelsnowden.gas_plugin;
+package com.michaelsnowden.gas;
 
 import com.google.gson.JsonObject;
 
 /**
  * @author michael.snowden
  */
-public class GASFile {
+public class File {
     private final String id;
     private final String name;
     private final String type;
     private final String source;
 
-    public GASFile(JsonObject jsonObject) {
+    public File(JsonObject jsonObject) {
         this(jsonObject.get("id").getAsString(), jsonObject.get("name").getAsString(), jsonObject.get
                 ("type").getAsString(), jsonObject.get("source").getAsString());
     }
 
-    public GASFile(String id, String name, String type, String source) {
+    public File(String id, String name, String type, String source) {
         this.id = id;
         this.name = name;
         this.type = type;

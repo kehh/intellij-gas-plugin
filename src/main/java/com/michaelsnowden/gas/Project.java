@@ -1,4 +1,4 @@
-package com.michaelsnowden.gas_plugin;
+package com.michaelsnowden.gas;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.services.drive.Drive;
@@ -15,18 +15,18 @@ import java.util.List;
 /**
  * @author michael.snowden
  */
-public class GASProject {
-    private final List<GASFile> gasFiles;
+public class Project {
+    private final List<File> files;
 
-    public GASProject(List<GASFile> gasFiles) {
-        this.gasFiles = gasFiles;
+    public Project(List<File> files) {
+        this.files = files;
     }
 
-    public List<GASFile> getGasFiles() {
-        return gasFiles;
+    public List<File> getFiles() {
+        return files;
     }
 
-    public static GASProject downloadGASProject(Drive drive, String projectId) throws IOException {
+    public static Project downloadGASProject(Drive drive, String projectId) throws IOException {
         InputStream content = drive.getRequestFactory().buildGetRequest(new GenericUrl(drive.files().get(projectId)
                 .execute().getExportLinks().get("application/vnd.google-apps.script+json"))).execute().getContent();
         java.util.Scanner s = new java.util.Scanner(content).useDelimiter("\\A");
@@ -34,10 +34,10 @@ public class GASProject {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonString);
         JsonArray files = jsonObject.getAsJsonArray("files");
-        List<GASFile> gasFiles = new ArrayList<GASFile>();
+        List<File> gasFiles = new ArrayList<File>();
         for (JsonElement jsonElement : files) {
-            gasFiles.add(new GASFile(jsonElement.getAsJsonObject()));
+            gasFiles.add(new File(jsonElement.getAsJsonObject()));
         }
-        return new GASProject(gasFiles);
+        return new Project(gasFiles);
     }
 }
