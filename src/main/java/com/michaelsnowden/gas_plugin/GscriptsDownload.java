@@ -41,7 +41,7 @@ public class GscriptsDownload extends AnAction {
         final String title = "Input Your GAS Project ID";
         final Icon questionIcon = Messages.getQuestionIcon();
         final String projectId = Messages.showInputDialog(project, message, title, questionIcon);
-        return GASProject.downloadGASProject(DriveQuickstart.getDriveService(), projectId);
+        return GASProject.downloadGASProject(DriveFactory.getDriveService(), projectId);
     }
 
     private void importGasProject(PsiFile currentFile, Project project, GASProject gasProject) {

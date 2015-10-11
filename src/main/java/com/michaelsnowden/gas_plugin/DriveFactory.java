@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Set;
 
-public class DriveQuickstart {
+public class DriveFactory {
     /**
      * Application name.
      */
