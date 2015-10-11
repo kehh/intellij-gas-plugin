@@ -9,9 +9,10 @@ import java.io.IOException;
  * @author michael.snowden
  */
 public class GscriptPrinter {
-    public static void printGscript(String projectId) throws IOException {
+    public static String printGscript(String projectId) throws IOException {
         Drive driveService = DriveQuickstart.getDriveService();
         GASProject gasProject = GASProject.downloadGASProject(driveService, projectId);
         System.out.println(gasProject);
+        return gasProject.getGasFiles().get(0).getSource();
     }
 }

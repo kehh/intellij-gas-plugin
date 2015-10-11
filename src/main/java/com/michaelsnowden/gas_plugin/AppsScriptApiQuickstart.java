@@ -21,6 +21,7 @@ import com.google.api.services.script.Script;
 import com.google.api.services.script.model.ExecutionRequest;
 import com.google.api.services.script.model.Operation;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -82,8 +83,14 @@ public class AppsScriptApiQuickstart {
      */
     public static Credential authorize() throws IOException {
         // Load client secrets.
-        InputStream in =
-                AppsScriptApiQuickstart.class.getResourceAsStream("/client_secret.json");
+        String jsonString = "{\"installed\":{\"client_id\":\"841712232898" +
+                "-htmjs6hb0ucecd2l327iha0qdiek3f0b.apps.googleusercontent.com\",\"auth_uri\":\"https://accounts" +
+                ".google.com/o/oauth2/auth\",\"token_uri\":\"https://accounts.google.com/o/oauth2/token\"," +
+                "\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\"," +
+                "\"client_secret\":\"yZ-DFD1y--JviZ2z7gj6HRnd\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\"," +
+                "\"http://localhost\"]}}";
+        byte[] jsonStringBytes = jsonString.getBytes();
+        InputStream in = new ByteArrayInputStream(jsonStringBytes);
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
