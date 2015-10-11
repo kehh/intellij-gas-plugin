@@ -25,28 +25,21 @@ import java.io.IOException;
  */
 public class DownloadAction extends AnAction {
     public void actionPerformed(AnActionEvent actionEvent) {
-        try {
-            com.intellij.openapi.project.Project project = actionEvent.getProject();
-            assert project != null;
-            Project gasProject = getGasProject(project);
-            final DataContext dataContext = actionEvent.getDataContext();
-            final PsiFile currentFile = DataKeys.PSI_FILE.getData(dataContext);
-            importGasProject(currentFile, project, gasProject);
-            System.out.println("");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    private Project getGasProject(com.intellij.openapi.project.Project project) throws IOException {
+        com.intellij.openapi.project.Project project = actionEvent.getProject();
+        final DataContext dataContext = actionEvent.getDataContext();
+        final PsiFile currentFile = DataKeys.PSI_FILE.getData(dataContext);
+        assert project != null;
         final String message = "What is your GAS project ID?";
         final String title = "Input Your GAS Project ID";
         final Icon questionIcon = Messages.getQuestionIcon();
         final String projectId = Messages.showInputDialog(project, message, title, questionIcon);
-        return Project.downloadGASProject(DriveFactory.getDriveService(), projectId);
-    }
-
-    private void importGasProject(PsiFile currentFile, com.intellij.openapi.project.Project project, Project gasProject) {
+        Project gasProject = null;
+        try {
+            gasProject = Project.downloadGASProject(DriveFactory.getDriveService(), projectId);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
         VirtualFile chooseFile = project.getBaseDir();
         if (currentFile != null) {
             chooseFile = currentFile.getVirtualFile();
@@ -74,5 +67,6 @@ public class DownloadAction extends AnAction {
                 }
             });
         }
+        System.out.println("");
     }
 }

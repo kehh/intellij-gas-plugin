@@ -38,12 +38,12 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="gscripts-download" class="com.michaelsnowden.gas.DownloadAction"
-            text="Download gscripts from Google Drive">
+    <action id="gas-download" class="com.michaelsnowden.gas.DownloadAction"
+            text="Download GAS from Google Drive">
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta O"/>
     </action>
-    <action id="gas-upload" class="com.michaelsnowden.gas.UploadAction" text="Upload GAS">
-      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl P"/>
+    <action id="gas-upload" class="com.michaelsnowden.gas.UploadAction" text="Upload GAS from Google Drive">
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta P"/>
     </action>
   </actions>
 

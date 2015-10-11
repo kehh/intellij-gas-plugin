@@ -26,6 +26,15 @@ public class Project {
         return files;
     }
 
+    public File getFileWithName(String name) {
+        for (File file : files) {
+            if ((file.getName() + ".gs").equals(name)) {
+                return file;
+            }
+        }
+        return null;
+    }
+
     public static Project downloadGASProject(Drive drive, String projectId) throws IOException {
         InputStream content = drive.getRequestFactory().buildGetRequest(new GenericUrl(drive.files().get(projectId)
                 .execute().getExportLinks().get("application/vnd.google-apps.script+json"))).execute().getContent();
