@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "source": "function doGet() {\n  return HtmlService.createHtmlOutputFromFile('index');\n}\n\n\n\n",
+      "type": "server_js",
+      "id": "aea0b458-239b-4f35-9433-2d9a60d65fba",
+      "name": "Two"
+    },
+    {
+      "source": "function foo() {\n  return 42;\n}",
+      "type": "server_js",
+      "name": "New"
+    }
+  ]
+}
