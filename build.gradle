@@ -6,7 +6,6 @@ version = '1.0-SNAPSHOT'
 
 description = """"""
 
-mainClassName = 'DriveQuickstart'
 sourceCompatibility = 1.5
 targetCompatibility = 1.5
 
@@ -19,24 +18,4 @@ dependencies {
     compile 'com.google.api-client:google-api-client:1.20.0'
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
     compile 'com.google.apis:google-api-services-drive:v2-rev170-1.20.0'
-}
-
-
-apply plugin: 'java'
-apply plugin: 'application'
-
-mainClassName = 'DriveQuickstart'
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-version = '1.0'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile 'com.google.api-client:google-api-client:1.20.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.20.0'
-    compile 'com.google.apis:google-api-services-drive:v2-rev170-1.20.0'
-
 }
