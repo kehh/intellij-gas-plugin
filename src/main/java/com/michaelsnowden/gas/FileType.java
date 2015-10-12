@@ -20,4 +20,22 @@ public enum FileType {
     public String getType() {
         return type;
     }
+
+    public static FileType getByExtension(String extension) {
+        for (FileType fileType : FileType.values()) {
+            if (fileType.getExtension().equals(extension)) {
+                return fileType;
+            }
+        }
+        return null;
+    }
+
+    public static FileType getByType(String type) {
+        for (FileType fileType : FileType.values()) {
+            if (fileType.getType().equals(type)) {
+                return fileType;
+            }
+        }
+        return null;
+    }
 }

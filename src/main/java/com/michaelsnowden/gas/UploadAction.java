@@ -65,8 +65,8 @@ public class UploadAction extends AnAction {
                     final PsiFile[] files = directory.getFiles();
                     for (PsiFile newPsiFile : files) {
                         // final String extension = newPsiFile.getFileType().getDefaultExtension();
-                        // TODO: Fix this to not work for unsupported file extensions
-                        if (true) {
+                        final String extension = newPsiFile.getVirtualFile().getExtension();
+                        if (com.michaelsnowden.gas.FileType.getByExtension(extension) != null) {
                             Drive drive;
                             try {
                                 drive = DriveFactory.getDriveService();
@@ -79,14 +79,15 @@ public class UploadAction extends AnAction {
                                 final File gasFile = gasProject.getFileWithName(newPsiFile.getName());
 
                                 if (gasFile != null) {
-                                    final com.google.api.services.drive.model.File oldFile = drive.files().get
-                                            (gasFile.getId()).execute();
+
+                                    final com.google.api.services.drive.model.File oldProjectFile = drive.files().get
+                                            (projectId).execute();
                                     // File's new content.
                                     java.io.File newFile = new java.io.File(newPsiFile.getVirtualFile().getPath());
                                     FileContent newMediaContent = new FileContent(mimeType, newFile);
 
                                     // Send the request to the API.
-                                    drive.files().update(oldFile.getId(), oldFile, newMediaContent).execute();
+                                    drive.files().update(oldProjectFile.getId(), oldProjectFile, newMediaContent).execute();
                                 } else {
                                     System.out.println("Couldn't upload file: " + newPsiFile.getName() + " because it doesn't exist yet");
                                 }
@@ -102,21 +103,6 @@ public class UploadAction extends AnAction {
                 }
             }
         });
-
-//        for (File gasFile : gasProject.getFiles()) {
-//            String source = gasFile.getSource();
-//            String name = gasFile.getName() + ".gs";
-//            final PsiFile file = PsiFileFactory.getInstance(project).createFileFromText(name, gs, source);
-//
-//            ApplicationManager.getApplication().runWriteAction(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if (directory != null) {
-//                        directory.add(file);
-//                    }
-//                }
-//            });
-//        }
         System.out.println("");
     }
 }
