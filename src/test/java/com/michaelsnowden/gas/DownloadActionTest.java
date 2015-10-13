@@ -1,5 +1,6 @@
 package com.michaelsnowden.gas;
 
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.builders.JavaModuleFixtureBuilder;
 import com.intellij.testFramework.fixtures.*;
 
@@ -18,6 +19,9 @@ public class DownloadActionTest extends LightCodeInsightFixtureTestCase {
         setUp();
         DownloadAction.download(getProject(), "1crSY1vSic8NYvCosnGvgCs60oVJDpvka-EEiBi3hQnBEq29xNDcQ58Gb", getProject
                 ().getBaseDir());
-        System.out.println("");
+        final VirtualFile[] children = getProject().getBaseDir().getChildren();
+        assertNotNull(children);
+        assertEquals(children.length, 1);
+        assertEquals(children[0].getName(), "Code.gs");
     }
 }
