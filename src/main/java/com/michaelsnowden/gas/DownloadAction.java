@@ -33,6 +33,21 @@ public class DownloadAction extends AnAction {
         final String title = "Input Your GAS Project ID";
         final Icon questionIcon = Messages.getQuestionIcon();
         final String projectId = Messages.showInputDialog(project, message, title, questionIcon);
+        VirtualFile chooseFile = project.getBaseDir();
+        if (currentFile != null) {
+            chooseFile = currentFile.getVirtualFile();
+        }
+        FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
+        chooseFile = FileChooser.chooseFile(descriptor, project, chooseFile);
+        if (chooseFile == null) {
+            return;
+        }
+        download(project, projectId, chooseFile);
+    }
+
+    public static void download(com.intellij.openapi.project.Project project, String projectId, VirtualFile chooseFile) {
+        final PsiDirectory directory = PsiManager.getInstance(project).findDirectory(chooseFile);
+
         Project gasProject = null;
         try {
             gasProject = Project.downloadGASProject(DriveFactory.getDriveService(), projectId);
@@ -40,18 +55,6 @@ public class DownloadAction extends AnAction {
             e.printStackTrace();
             return;
         }
-        VirtualFile chooseFile = project.getBaseDir();
-        if (currentFile != null) {
-            chooseFile = currentFile.getVirtualFile();
-        }
-        FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
-        PsiManager psiManager = PsiManager.getInstance(project);
-        chooseFile = FileChooser.chooseFile(descriptor, project, chooseFile);
-        if (chooseFile == null) {
-            return;
-        }
-        final PsiDirectory directory = psiManager.findDirectory(chooseFile);
-
         FileType gs = FileTypeManager.getInstance().getFileTypeByExtension("gs");
         for (File gasFile : gasProject.getFiles()) {
             String source = gasFile.getSource();

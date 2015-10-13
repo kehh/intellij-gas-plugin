@@ -46,5 +46,4 @@
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta P"/>
     </action>
   </actions>
-
 </idea-plugin>
