@@ -10,8 +10,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
@@ -30,7 +28,7 @@ public class UploadAction extends AnAction {
         final PsiFile currentFile = DataKeys.PSI_FILE.getData(dataContext);
         com.intellij.openapi.project.Project project = actionEvent.getProject();
         assert project != null;
-        final String message = "What is your GAS project ID?";
+        final String message = "Upload files to your GAS project";
         final String title = "Input Your GAS Project ID";
         final Icon questionIcon = Messages.getQuestionIcon();
         final String projectId = Messages.showInputDialog(project, message, title, questionIcon);
@@ -55,16 +53,12 @@ public class UploadAction extends AnAction {
             return;
         }
         final PsiDirectory directory = psiManager.findDirectory(chooseFile);
-
-        FileType gs = FileTypeManager.getInstance().getFileTypeByExtension("gs");
-
         ApplicationManager.getApplication().runReadAction(new Runnable() {
             @Override
             public void run() {
                 if (directory != null) {
                     final PsiFile[] files = directory.getFiles();
                     for (PsiFile newPsiFile : files) {
-                        // final String extension = newPsiFile.getFileType().getDefaultExtension();
                         final String extension = newPsiFile.getVirtualFile().getExtension();
                         if (com.michaelsnowden.gas.FileType.getByExtension(extension) != null) {
                             Drive drive;
