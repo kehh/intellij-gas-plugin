@@ -54,7 +54,7 @@ public class Upload {
                             scriptFile.addProperty("id", gasFile.getId());
                         }
                         // File's new content.
-                        scriptFile.addProperty("name", newPsiFileVirtualFile.getName());
+                        scriptFile.addProperty("name", newPsiFileVirtualFile.getNameWithoutExtension());
                         scriptFile.addProperty("type", byExtension.getType());
                         try {
                             scriptFile.addProperty("source", Files.toString(newFile, StandardCharsets.UTF_8));
