@@ -7,7 +7,7 @@ import com.intellij.testFramework.fixtures.*;
 /**
  * @author michael.snowden
  */
-public class DownloadActionTest extends LightCodeInsightFixtureTestCase {
+public class DownloadTest extends LightCodeInsightFixtureTestCase {
     public void testDownload() throws Exception {
         final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder = IdeaTestFixtureFactory.getFixtureFactory()
                 .createFixtureBuilder(getName());
@@ -17,7 +17,7 @@ public class DownloadActionTest extends LightCodeInsightFixtureTestCase {
 
         myFixture = JavaTestFixtureFactory.getFixtureFactory().createCodeInsightFixture(projectBuilder.getFixture());
         setUp();
-        DownloadAction.download(getProject(), "1crSY1vSic8NYvCosnGvgCs60oVJDpvka-EEiBi3hQnBEq29xNDcQ58Gb", getProject
+        Download.download(getProject(), "1crSY1vSic8NYvCosnGvgCs60oVJDpvka-EEiBi3hQnBEq29xNDcQ58Gb", getProject
                 ().getBaseDir());
         final VirtualFile[] children = getProject().getBaseDir().getChildren();
         assertNotNull(children);
