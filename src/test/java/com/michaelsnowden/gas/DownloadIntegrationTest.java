@@ -17,7 +17,9 @@ public class DownloadIntegrationTest extends LightCodeInsightFixtureTestCase {
 
         myFixture = JavaTestFixtureFactory.getFixtureFactory().createCodeInsightFixture(projectBuilder.getFixture());
         setUp();
-        Download.download(getProject(), "1crSY1vSic8NYvCosnGvgCs60oVJDpvka-EEiBi3hQnBEq29xNDcQ58Gb", getProject
+        final com.google.api.services.drive.model.File newProject = CreateProject.createProject();
+        final String projectId = newProject.getId();
+        Download.download(getProject(), projectId, getProject
                 ().getBaseDir());
         final VirtualFile[] children = getProject().getBaseDir().getChildren();
         assertNotNull(children);

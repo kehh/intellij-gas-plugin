@@ -20,9 +20,9 @@ import java.nio.charset.StandardCharsets;
 public class Upload {
     static void upload(com.intellij.openapi.project.Project project, final String projectId, VirtualFile
             chooseFile) throws IOException {
-        final Project gasProject;
+        final LocalGASProject gasProject;
         final PsiDirectory directory = PsiManager.getInstance(project).findDirectory(chooseFile);
-        gasProject = Project.downloadGASProject(DriveFactory.getDriveService(), projectId);
+        gasProject = LocalGASProject.downloadGASProject(DriveFactory.getDriveService(), projectId);
         final Drive drive;
         drive = DriveFactory.getDriveService();
         ApplicationManager.getApplication().runReadAction(new Runnable() {
@@ -43,9 +43,9 @@ public class Upload {
                 JsonArray jsonArray = new JsonArray();
                 for (PsiFile newPsiFile : files) {
                     final String extension = newPsiFile.getVirtualFile().getExtension();
-                    final FileType byExtension = FileType.getByExtension(extension);
+                    final GASFileType byExtension = GASFileType.getByExtension(extension);
                     if (byExtension != null) {
-                        final File gasFile = gasProject.getFileWithName(newPsiFile.getName());
+                        final LocalGASFile gasFile = gasProject.getFileWithName(newPsiFile.getName());
 
                         final VirtualFile newPsiFileVirtualFile = newPsiFile.getVirtualFile();
                         java.io.File newFile = new java.io.File(newPsiFileVirtualFile.getPath());

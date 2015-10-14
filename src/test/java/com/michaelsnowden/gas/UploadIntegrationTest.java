@@ -24,7 +24,8 @@ public class UploadIntegrationTest extends LightCodeInsightFixtureTestCase {
         setUp();
         final VirtualFile baseDir = getProject()
                 .getBaseDir();
-        final String projectId = "1crSY1vSic8NYvCosnGvgCs60oVJDpvka-EEiBi3hQnBEq29xNDcQ58Gb";
+        final com.google.api.services.drive.model.File project = CreateProject.createProject();
+        final String projectId = project.getId();
         Download.download(getProject(), projectId, baseDir);
         final PsiDirectory directory = PsiManager.getInstance(getProject()).findDirectory(baseDir);
         com.intellij.openapi.fileTypes.FileType gs = FileTypeManager.getInstance().getFileTypeByExtension("gs");

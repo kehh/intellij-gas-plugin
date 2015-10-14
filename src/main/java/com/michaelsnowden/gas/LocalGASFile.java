@@ -5,18 +5,18 @@ import com.google.gson.JsonObject;
 /**
  * @author michael.snowden
  */
-public class File {
+public class LocalGASFile {
     private final String id;
     private final String name;
     private final String type;
     private final String source;
 
-    public File(JsonObject jsonObject) {
+    public LocalGASFile(JsonObject jsonObject) {
         this(jsonObject.get("id").getAsString(), jsonObject.get("name").getAsString(), jsonObject.get
                 ("type").getAsString(), jsonObject.get("source").getAsString());
     }
 
-    public File(String id, String name, String type, String source) {
+    public LocalGASFile(String id, String name, String type, String source) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -38,4 +38,6 @@ public class File {
     public String getSource() {
         return source;
     }
+
+    public String getFullName() { return GASFileType.getByType(type).getExtension() + "." + name; }
 }

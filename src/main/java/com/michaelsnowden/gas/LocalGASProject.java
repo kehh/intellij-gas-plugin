@@ -15,19 +15,25 @@ import java.util.List;
 /**
  * @author michael.snowden
  */
-public class Project {
-    private final List<File> files;
+public class LocalGASProject {
+    private final List<LocalGASFile> files;
+    private final Integer id;
 
-    public Project(List<File> files) {
-        this.files = files;
+    public LocalGASProject(List<LocalGASFile> files) {
+        this(files, null);
     }
 
-    public List<File> getFiles() {
+    public LocalGASProject(List<LocalGASFile> files, Integer id) {
+        this.files = files;
+        this.id = id;
+    }
+
+    public List<LocalGASFile> getFiles() {
         return files;
     }
 
-    public File getFileWithName(String name) {
-        for (File file : files) {
+    public LocalGASFile getFileWithName(String name) {
+        for (LocalGASFile file : files) {
             if ((file.getName() + ".gs").equals(name)) {
                 return file;
             }
@@ -35,7 +41,7 @@ public class Project {
         return null;
     }
 
-    public static Project downloadGASProject(Drive drive, String projectId) throws IOException {
+    public static LocalGASProject downloadGASProject(Drive drive, String projectId) throws IOException {
         InputStream content = drive.getRequestFactory().buildGetRequest(new GenericUrl(drive.files().get(projectId)
                 .execute().getExportLinks().get("application/vnd.google-apps.script+json"))).execute().getContent();
         java.util.Scanner s = new java.util.Scanner(content).useDelimiter("\\A");
@@ -43,10 +49,10 @@ public class Project {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(jsonString);
         JsonArray files = jsonObject.getAsJsonArray("files");
-        List<File> gasFiles = new ArrayList<File>();
+        List<LocalGASFile> gasFiles = new ArrayList<LocalGASFile>();
         for (JsonElement jsonElement : files) {
-            gasFiles.add(new File(jsonElement.getAsJsonObject()));
+            gasFiles.add(new LocalGASFile(jsonElement.getAsJsonObject()));
         }
-        return new Project(gasFiles);
+        return new LocalGASProject(gasFiles);
     }
 }

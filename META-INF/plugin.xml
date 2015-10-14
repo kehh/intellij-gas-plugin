@@ -43,5 +43,9 @@
     <action id="gas-upload" class="com.michaelsnowden.gas.UploadAction" text="Upload GAS from Google Drive">
       <keyboard-shortcut keymap="$default" first-keystroke="shift meta P"/>
     </action>
+    <action id="create-project-action" class="com.michaelsnowden.gas.CreateProjectAction"
+            text="Create a Google Apps Script project">
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta I"/>
+    </action>
   </actions>
 </idea-plugin>
