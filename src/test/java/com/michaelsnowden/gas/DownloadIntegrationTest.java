@@ -7,7 +7,7 @@ import com.intellij.testFramework.fixtures.*;
 /**
  * @author michael.snowden
  */
-public class DownloadTest extends LightCodeInsightFixtureTestCase {
+public class DownloadIntegrationTest extends LightCodeInsightFixtureTestCase {
     public void testDownload() throws Exception {
         final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder = IdeaTestFixtureFactory.getFixtureFactory()
                 .createFixtureBuilder(getName());

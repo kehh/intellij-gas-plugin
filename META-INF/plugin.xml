@@ -1,17 +1,15 @@
 <idea-plugin version="2">
-  <id>com.yourcompany.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>com.michaelsnowden.gas-plugin</id>
+  <name>Google Apps Script Synchronization</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="msnowden@berkeley.edu" url="https://github.com/MichaelSnowden">Michael Snowden</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      Synchronization for Google Apps Script with your Google Drive.<br>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      Added import/export capabilities.<br>
     ]]>
   </change-notes>
 

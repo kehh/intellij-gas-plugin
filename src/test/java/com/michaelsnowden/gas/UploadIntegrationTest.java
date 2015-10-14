@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * @author michael.snowden
  */
-public class UploadTest extends LightCodeInsightFixtureTestCase {
+public class UploadIntegrationTest extends LightCodeInsightFixtureTestCase {
     public void testUpload() throws Exception {
         final TestFixtureBuilder<IdeaProjectTestFixture> projectBuilder = IdeaTestFixtureFactory.getFixtureFactory()
                 .createFixtureBuilder(getName());
