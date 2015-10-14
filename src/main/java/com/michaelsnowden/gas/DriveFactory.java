@@ -25,12 +25,6 @@ import java.util.Set;
 
 public class DriveFactory {
     /**
-     * Application name.
-     */
-    private static final String APPLICATION_NAME =
-            "Drive API Java Quickstart";
-
-    /**
      * Directory to store user credentials for this application.
      */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
@@ -75,11 +69,11 @@ public class DriveFactory {
      */
     public static Credential authorize() throws IOException {
         // Load client secrets.
-        String jsonString = "{\"installed\":{\"client_id\":\"841712232898" +
-                "-htmjs6hb0ucecd2l327iha0qdiek3f0b.apps.googleusercontent.com\",\"auth_uri\":\"https://accounts" +
-                ".google.com/o/oauth2/auth\",\"token_uri\":\"https://accounts.google.com/o/oauth2/token\"," +
+        String jsonString = "{\"installed\":{\"client_id\":\"841712232898-7ivnmabatm4su97iikehe5e7uo7fm8vh.apps" +
+                ".googleusercontent.com\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\"," +
+                "\"token_uri\":\"https://accounts.google.com/o/oauth2/token\"," +
                 "\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\"," +
-                "\"client_secret\":\"yZ-DFD1y--JviZ2z7gj6HRnd\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\"," +
+                "\"client_secret\":\"crM6scaKL3BXs5P2cs7JV5zl\",\"redirect_uris\":[\"urn:ietf:wg:oauth:2.0:oob\"," +
                 "\"http://localhost\"]}}";
         byte[] jsonStringBytes = jsonString.getBytes();
         InputStream in = new ByteArrayInputStream(jsonStringBytes);
@@ -110,7 +104,6 @@ public class DriveFactory {
         Credential credential = authorize();
         return new Drive.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
-                .setApplicationName(APPLICATION_NAME)
                 .build();
     }
 }
