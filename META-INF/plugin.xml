@@ -23,11 +23,14 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+      <moduleBuilder builderClass="com.michaelsnowden.gas.GASModuleBuilder"/>
   </extensions>
 
   <application-components>
     <!-- Add your application components here -->
+    <component>
+      <implementation-class>com.michaelsnowden.gas.ChangeListener</implementation-class>
+    </component>
   </application-components>
 
   <project-components>
