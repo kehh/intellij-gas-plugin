@@ -14,7 +14,7 @@ public class CreateProjectAction extends AnAction {
         try {
             final com.google.api.services.drive.model.File project = CreateProject.createProject();
             final String projectId = project.getId();
-            Messages.showMessageDialog(e.getProject(), "Please save this project ID somewhere you'll Remember", "Your" +
+            Messages.showMessageDialog(e.getProject(), projectId, "Your" +
                     " New Project ID", Messages.getInformationIcon());
         } catch (IOException e1) {
             Messages.showErrorDialog(e.getProject(), "Could not create project", e1.getMessage());
